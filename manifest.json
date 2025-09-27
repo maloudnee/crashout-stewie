@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Crashout Stewie",
+    "version": "1.0",
+    "description": "Stewie Griffin (the loveable baby from Family Guy) crashes out whenever you make a mistake",
+    "permmisions": ["activeTab", "scripting"],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "48": "images/"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content.js"]
+        }
+    ],
+    "icons": {
+        "48": "images/" 
+    }
+}
