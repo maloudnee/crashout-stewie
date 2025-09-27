@@ -1,5 +1,5 @@
 // Grammar check
-export async function checkGrammar(text) {
+async function checkGrammar(text) {
     if(!text) return null;
 
     const res = await fetch("https://api.languagetool.org/v2/check", {
@@ -16,7 +16,7 @@ export async function checkGrammar(text) {
 }
 
 // Code check
-export function checkCode(text, element) {
+function checkCode(text, element) {
     if(!text || !element) return null;
     if(element.tagName === "TEXTAREA" && element.classList.contains("code-editor")){
         if(text.includes("System.out.println") && !text.trim().endsWith(";")) {
@@ -27,7 +27,7 @@ export function checkCode(text, element) {
 }
 
 // Math check
-export function checkMath(element) {
+function checkMath(element) {
     if (!text || !element) return null; 
     if(element.classList.contains("incorrect") || element.innerText.includes("Incorrect")) {
         return { type: "math", error: "wrong answer" };
@@ -36,7 +36,7 @@ export function checkMath(element) {
 }
 
 // Quiz/Assessment check
-export function checkQuiz(element) {
+function checkQuiz(element) {
     const wrongMsgs = document.querySelectorAll(".incorrect, .feedback, .error");
     for (const msg of wrongMsgs) {
         if(/incorrect|wrong/i.test(msg.innerText)) {
@@ -46,7 +46,7 @@ export function checkQuiz(element) {
 }
 
 // Master detection
-export async function detectMistake(text, element) {
+async function detectMistake(text, element) {
     const gammarMistake = await checkGrammar(text);
     if(grammarMistake) return grammarMistake;
 
