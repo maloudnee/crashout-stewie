@@ -1,4 +1,4 @@
-const GOOGLE_API_KEY = "AIzaSyACSe2bmcXs8g1uET1e_rgJoXsNb06TA_4";
+const GOOGLE_API_KEY = "YOUR_API_KEY";
 
 let mistakeCount = 0;
 
