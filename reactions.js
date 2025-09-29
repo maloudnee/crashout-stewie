@@ -1,7 +1,8 @@
 function showStewie(mood, quote) {
     // If an image of stewie is already there, remove it
     const oldStewie = document.getElementById("Stewie-container");
-    if (old) old.remove()
+    if (oldStewie) oldStewie.remove()
+    console.log("in show stewie function ..");
 
     // Container 
     const container = document.createElement("div");
@@ -14,8 +15,8 @@ function showStewie(mood, quote) {
 
     // Image
     const image = document.createElement("img");
-    img.src = chrome.runtime.getURL(`$images/$(mood).png`);
-    img.style.width = "256px"
+    image.src = chrome.runtime.getURL(`images/${mood}.png`);
+    image.style.width = "256px"
 
     // Speech buble
     const bubble = document.createElement("div");
@@ -33,17 +34,20 @@ function showStewie(mood, quote) {
     document.body.appendChild(container);
 
     // Speak whats being said in the speech bubble
-    speakieStewie(quote);
+    if (Math.random() < 0.3) {
+        speakStewie(quote);
+    }
 
     // Remove stewie's appearance after 7 seconds
     setTimeout(() => container.remove(), 5000);
 }
 
 function speakStewie(quote) {
+    console.log("Speaking", quote);
     const utterance = new SpeechSynthesisUtterance(quote);
     utterance.lang = "en-GB"
     utterance.rate = 1;
-    utterance.pitch = 0.2
+    utterance.pitch = 0.2;
 
     window.speechSynthesis.speak(utterance);
 }

@@ -5,7 +5,7 @@ async function checkGrammar(text) {
     const res = await fetch("https://api.languagetool.org/v2/check", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded"},
-        body: `text=${encodedURIComponent(text)}&language=en-US`
+        body: `text=${encodeURIComponent(text)}&language=en-US`
     });
 
     const data = await res.json();
@@ -27,7 +27,7 @@ function checkCode(text, element) {
 }
 
 // Math check
-function checkMath(element) {
+function checkMath(text, element) {
     if (!text || !element) return null; 
     if(element.classList.contains("incorrect") || element.innerText.includes("Incorrect")) {
         return { type: "math", error: "wrong answer" };
@@ -36,27 +36,28 @@ function checkMath(element) {
 }
 
 // Quiz/Assessment check
-function checkQuiz(element) {
+function checkQuiz() {
     const wrongMsgs = document.querySelectorAll(".incorrect, .feedback, .error");
     for (const msg of wrongMsgs) {
         if(/incorrect|wrong/i.test(msg.innerText)) {
             return { type: "quiz", error: "wrong answer" };
         }
     }
+    return null;
 }
 
 // Master detection
 async function detectMistake(text, element) {
-    const gammarMistake = await checkGrammar(text);
+    const grammarMistake = await checkGrammar(text);
     if(grammarMistake) return grammarMistake;
 
     const codeMistake = await checkCode(text, element);
     if(codeMistake) return codeMistake;
 
-    const mathMistake = await checkMath(element);
+    const mathMistake = await checkMath(text, element);
     if(mathMistake) return mathMistake;
 
-    const quizMistake = await checkQuiz(element);
+    const quizMistake = await checkQuiz();
     if(quizMistake) return quizMistake; 
 
     return null; 

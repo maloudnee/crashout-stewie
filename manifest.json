@@ -5,13 +5,12 @@
     "description": "Stewie Griffin (the loveable baby from Family Guy) crashes out whenever you make a mistake",
     "permissions": ["activeTab"],
     "background": {
-        "service_worker": "background.js",
-        "type": "module"
+        "service_worker": "background.js"
     },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["detectors.js", "content.js"]
+            "js": ["reactions.js", "detectors.js", "content.js"]
         }
     ],
     "web_accessible_resources": [
