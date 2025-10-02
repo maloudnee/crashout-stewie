@@ -1,8 +1,3 @@
-// if (typeof chrome === "undefined" || !chrome.runtime) {
-//     console.error("❌ Not running as a Chrome extension (chrome.runtime is undefined).");
-//   } else {
-//     console.log("✅ Running inside Chrome extension context.");
-//   }
 
 // Watch input text in all text areas
 document.addEventListener("input", async(e) => {
