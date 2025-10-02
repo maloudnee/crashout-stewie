@@ -38,7 +38,7 @@ function showStewie(mood, quote) {
         speakStewie(quote);
     }
 
-    // Remove stewie's appearance after 7 seconds
+    // Remove stewie's appearance after 5 seconds
     setTimeout(() => container.remove(), 5000);
 }
 
